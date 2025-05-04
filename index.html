@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Script Hub - 250+ Scripts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --dark-blue: #0d47a1;
+            --light-blue: #e8f0fe;
+            --text: #202124;
+            --gray: #5f6368;
+            --light-gray: #f1f3f4;
+            --white: #ffffff;
+            --shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            --shadow-hover: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0a192f;
+            color: var(--white);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .search-container {
+            position: relative;
+            width: 300px;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 30px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .search-container input:focus {
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.5);
+        }
+
+        .search-container i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .tab.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .tab:hover:not(.active) {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .script-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .script-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .script-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            background-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .script-image {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+
+        .script-content {
+            padding: 15px;
+        }
+
+        .script-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .script-game {
+            font-size: 13px;
+            color: #aaa;
+            margin-bottom: 12px;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .script-description {
+            font-size: 14px;
+            color: #ccc;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .script-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .script-key {
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background-color: rgba(0, 255, 0, 0.1);
+            color: #0f0;
+        }
+
+        .script-key.not-available {
+            background-color: rgba(255, 0, 0, 0.1);
+            color: #f00;
+        }
+
+        .copy-btn {
+            padding: 6px 12px;
+            border-radius: 4px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--dark-blue);
+        }
+
+        .copy-btn.copied {
+            background-color: #0f0;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background-color: #0a192f;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 20px;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+            color: #aaa;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: white;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .modal-game {
+            font-size: 16px;
+            color: #4facfe;
+            margin-bottom: 15px;
+        }
+
+        .modal-description {
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+
+        .modal-script {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-break: break-all;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .modal-key {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .modal-key.available {
+            background-color: rgba(0, 255, 0, 0.1);
+            color: #0f0;
+        }
+
+        .modal-key.not-available {
+            background-color: rgba(255, 0, 0, 0.1);
+            color: #f00;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .modal-btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-copy {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .modal-copy:hover {
+            background-color: var(--dark-blue);
+        }
+
+        .modal-copy.copied {
+            background-color: #0f0;
+        }
+
+        .modal-close {
+            background-color: transparent;
+            color: #aaa;
+            border: 1px solid #aaa;
+        }
+
+        .modal-close:hover {
+            color: white;
+            border-color: white;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            grid-column: 1 / -1;
+        }
+
+        .empty-state i {
+            font-size: 50px;
+            color: rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .empty-state h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #aaa;
+        }
+
+        .empty-state p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .page-btn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .page-btn.active {
+            background-color: var(--primary);
+        }
+
+        .page-btn:hover:not(.active) {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .search-container {
+                width: 100%;
+            }
+
+            .tabs {
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+
+            .tabs::-webkit-scrollbar {
+                height: 5px;
+            }
+
+            .tabs::-webkit-scrollbar-thumb {
+                background-color: rgba(255, 255, 255, 0.2);
+                border-radius: 5px;
+            }
+
+            .script-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                
+                <h1></h1>
+            </div>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search 250+ scripts...">
+                <i class="fas fa-search"></i>
+            </div>
+        </header>
+
+        <div class="tabs">
+            <div class="tab active" data-category="all">All Scripts</div>
+            <div class="tab" data-category="popular">Popular</div>
+            <div class="tab" data-category="new">New</div>
+            <div class="tab" data-category="fps">FPS</div>
+            <div class="tab" data-category="rpg">RPG</div>
+            <div class="tab" data-category="simulator">Simulator</div>
+            <div class="tab" data-category="adventure">Adventure</div>
+            <div class="tab" data-category="anime">Anime</div>
+            <div class="tab" data-category="tycoon">Tycoon</div>
+            <div class="tab" data-category="mmo">MMO</div>
+            <div class="tab" data-category="horror">Horror</div>
+            <div class="tab" data-category="universal">Universal</div>
+        </div>
+
+        <div class="script-grid" id="scriptGrid">
+            <!-- Script cards will be dynamically inserted here -->
+        </div>
+
+        <div class="pagination" id="pagination">
+            <!-- Pagination buttons will be inserted here -->
+        </div>
+    </div>
+
+    <div class="modal" id="scriptModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <img class="modal-image" id="modalImage" src="" alt="Script Image">
+            <h2 class="modal-title" id="modalTitle"></h2>
+            <p class="modal-game" id="modalGame"></p>
+            <p class="modal-description" id="modalDescription"></p>
+            <div class="modal-script" id="modalScript"></div>
+            <div class="modal-key" id="modalKey"></div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-copy" id="modalCopyBtn">Copy Script</button>
+                <button class="modal-btn modal-close" id="modalCloseBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Script database with 250+ entries
+        const scripts = generateScriptDatabase();
+        
+        // Configuration
+        const scriptsPerPage = 20;
+        let currentPage = 1;
+        let currentCategory = 'all';
+        let currentSearch = '';
+
+        // DOM elements
+        const scriptGrid = document.getElementById('scriptGrid');
+        const searchInput = document.getElementById('searchInput');
+        const tabs = document.querySelectorAll('.tab');
+        const scriptModal = document.getElementById('scriptModal');
+        const closeModal = document.getElementById('closeModal');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+        const modalImage = document.getElementById('modalImage');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalGame = document.getElementById('modalGame');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalScript = document.getElementById('modalScript');
+        const modalKey = document.getElementById('modalKey');
+        const modalCopyBtn = document.getElementById('modalCopyBtn');
+        const pagination = document.getElementById('pagination');
+
+        // Initialize the page
+        function init() {
+            renderScripts();
+            setupEventListeners();
+            renderPagination();
+        }
+
+        // Generate a large script database
+        function generateScriptDatabase() {
+            const games = [
+                { name: "Arsenal", categories: ["fps", "popular"] },
+                { name: "Phantom Forces", categories: ["fps"] },
+                { name: "Bad Business", categories: ["fps", "popular"] },
+                { name: "Counter Blox", categories: ["fps"] },
+                { name: "Blox Fruits", categories: ["rpg", "anime", "popular"] },
+                { name: "King Legacy", categories: ["rpg", "anime"] },
+                { name: "Grand Piece Online", categories: ["rpg", "anime"] },
+                { name: "Pet Simulator X", categories: ["simulator", "popular"] },
+                { name: "Adopt Me", categories: ["simulator"] },
+                { name: "Brookhaven RP", categories: ["simulator"] },
+                { name: "Jailbreak", categories: ["adventure", "popular"] },
+                { name: "Tower of Hell", categories: ["adventure"] },
+                { name: "Doors", categories: ["horror"] },
+                { name: "Evade", categories: ["horror"] },
+                { name: "Roblox (Universal)", categories: ["universal"] },
+                { name: "Anime Fighting Simulator", categories: ["anime", "rpg"] },
+                { name: "Shindo Life", categories: ["anime", "rpg"] },
+                { name: "All Star Tower Defense", categories: ["anime", "tower-defense"] },
+                { name: "Mining Simulator", categories: ["simulator"] },
+                { name: "Bee Swarm Simulator", categories: ["simulator"] },
+                { name: "Murder Mystery 2", categories: ["fps"] },
+                { name: "BedWars", categories: ["fps"] },
+                { name: "Rainbow Friends", categories: ["horror"] },
+                { name: "Piggy", categories: ["horror"] },
+                { name: "Royale High", categories: ["rpg"] },
+                { name: "Project Slayers", categories: ["anime", "rpg"] },
+                { name: "Slap Battles", categories: ["adventure"] },
+                { name: "Build A Boat For Treasure", categories: ["adventure"] }
+            ];
+
+            const scriptTypes = [
+                { name: "Aimbot", desc: "Advanced aiming assistance with customizable settings" },
+                { name: "ESP", desc: "Player and item visualization through walls" },
+                { name: "Auto Farm", desc: "Automatically completes repetitive tasks for you" },
+                { name: "Speed Hack", desc: "Increases movement and attack speed" },
+                { name: "Fly", desc: "Allows flying anywhere in the game" },
+                { name: "Infinite Yield", desc: "Advanced admin commands for moderation" },
+                { name: "Auto Collect", desc: "Automatically collects resources and items" },
+                { name: "Auto Win", desc: "Automatically wins games or matches" },
+                { name: "Item Dupe", desc: "Duplicates valuable in-game items" },
+                { name: "God Mode", desc: "Makes you invincible to damage" },
+                { name: "No Clip", desc: "Walk through walls and obstacles" },
+                { name: "Teleport", desc: "Instantly move to any location" },
+                { name: "Auto Parry", desc: "Automatically blocks incoming attacks" },
+                { name: "Auto Click", desc: "Automates clicking for repetitive tasks" },
+                { name: "Infinite Ammo", desc: "Never run out of ammunition" },
+                { name: "No Recoil", desc: "Removes weapon recoil for perfect accuracy" },
+                { name: "Silent Aim", desc: "Hits targets without visibly aiming" },
+                { name: "Auto Complete", desc: "Automatically completes objectives" },
+                { name: "Infinite Jump", desc: "Jump infinitely in mid-air" },
+                { name: "Wall Hack", desc: "See and shoot through walls" },
+                { name: "Chams", desc: "Highlights players through walls" },
+                { name: "Trigger Bot", desc: "Automatically shoots when target is in crosshair" },
+                { name: "FOV Changer", desc: "Adjust your field of view beyond normal limits" },
+                { name: "Hitbox Expander", desc: "Makes enemy hitboxes larger" },
+                { name: "Lag Switch", desc: "Creates artificial lag for advantage" }
+            ];
+
+            const scriptDatabase = [];
+            let id = 1;
+
+            // Generate scripts for each game and type combination
+            games.forEach(game => {
+                scriptTypes.forEach(type => {
+                    // Skip some unlikely combinations
+                    if (game.name.includes("Simulator") && type.name.includes("Aimbot")) return;
+                    if (game.name.includes("FPS") && type.name.includes("Auto Farm")) return;
+                    
+                    const hasKey = Math.random() > 0.3; // 70% chance of requiring key
+                    const isPopular = Math.random() > 0.7 || game.categories.includes("popular");
+                    const isNew = Math.random() > 0.8;
+                    
+                    scriptDatabase.push({
+                        id: id++,
+                        title: `${type.name} Script`,
+                        game: game.name,
+                        description: `${type.desc} for ${game.name}. ${getRandomDescriptionText()}`,
+                        image: getRandomImage(game.name),
+                        script: `loadstring(game:HttpGet('https://raw.githubusercontent.com/scripts/${game.name.toLowerCase().replace(/ /g,'')}/${type.name.toLowerCase().replace(/ /g,'')}.lua'))()`,
+                        key: hasKey ? generateRandomKey(game.name) : "Not required",
+                        category: [...game.categories, ...(isPopular ? ["popular"] : []), ...(isNew ? ["new"] : [])],
+                        hasKey: hasKey,
+                        createdAt: getRandomDate()
+                    });
+                });
+            });
+
+            // Add some universal scripts
+            for (let i = 0; i < 30; i++) {
+                const type = scriptTypes[Math.floor(Math.random() * scriptTypes.length)];
+                const hasKey = Math.random() > 0.5;
+                
+                scriptDatabase.push({
+                    id: id++,
+                    title: `Universal ${type.name}`,
+                    game: "Roblox (Universal)",
+                    description: `${type.desc} that works in most Roblox games. ${getRandomDescriptionText()}`,
+                    image: getRandomImage("universal"),
+                    script: `loadstring(game:HttpGet('https://raw.githubusercontent.com/scripts/universal/${type.name.toLowerCase().replace(/ /g,'')}_v${Math.floor(Math.random() * 5) + 1}.lua'))()`,
+                    key: hasKey ? generateRandomKey("UNIV") : "Not required",
+                    category: ["universal", ...(Math.random() > 0.7 ? ["popular"] : []), ...(Math.random() > 0.8 ? ["new"] : [])],
+                    hasKey: hasKey,
+                    createdAt: getRandomDate()
+                });
+            }
+
+            return scriptDatabase;
+        }
+
+        function getRandomDescriptionText() {
+            const extras = [
+                "Includes multiple customization options.",
+                "Works on both PC and mobile devices.",
+                "Undetectable by most anti-cheat systems.",
+                "Regularly updated to ensure functionality.",
+                "Has a built-in GUI for easy configuration.",
+                "Comes with premium support.",
+                "Includes extra features not found in other scripts.",
+                "Highly optimized for performance.",
+                "Used by professional players.",
+                "Completely open-source and safe to use."
+            ];
+            return extras[Math.floor(Math.random() * extras.length)];
+        }
+
+        function getRandomImage(gameName) {
+            const gameImages = {
+                "Arsenal": ["https://i.imgur.com/8KQnZ9f.png", "https://i.imgur.com/2KvLm9R.png"],
+                "Phantom Forces": ["https://i.imgur.com/1AbC2dE.png"],
+                "Blox Fruits": ["https://i.imgur.com/3QvJ7bT.png"],
+                "Pet Simulator X": ["https://i.imgur.com/7VnGk9d.png"],
+                "Jailbreak": ["https://i.imgur.com/JqYeZbL.png"],
+                "Tower of Hell": ["https://i.imgur.com/9LmNpXz.png"],
+                "Adopt Me": ["https://i.imgur.com/4MnQk9X.png"],
+                "Brookhaven RP": ["https://i.imgur.com/6DeFg7H.png"],
+                "Roblox (Universal)": ["https://i.imgur.com/5XZJQ9P.png"],
+                "universal": ["https://i.imgur.com/5XZJQ9P.png"]
+            };
+            
+            const defaultImages = [
+                "https://i.imgur.com/5XZJQ9P.png",
+                "https://i.imgur.com/JqYeZbL.png",
+                "https://i.imgur.com/3QvJ7bT.png",
+                "https://i.imgur.com/7VnGk9d.png",
+                "https://i.imgur.com/8KQnZ9f.png",
+                "https://i.imgur.com/2KvLm9R.png",
+                "https://i.imgur.com/9LmNpXz.png",
+                "https://i.imgur.com/4MnQk9X.png",
+                "https://i.imgur.com/6DeFg7H.png",
+                "https://i.imgur.com/1AbC2dE.png"
+            ];
+            
+            if (gameImages[gameName]) {
+                const images = gameImages[gameName];
+                return images[Math.floor(Math.random() * images.length)];
+            }
+            
+            return defaultImages[Math.floor(Math.random() * defaultImages.length)];
+        }
+
+        function generateRandomKey(prefix) {
+            const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+            let key = prefix + "-";
+            for (let i = 0; i < 3; i++) {
+                for (let j = 0; j < 3; j++) {
+                    key += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                if (i < 2) key += "-";
+            }
+            return key;
+        }
+
+        function getRandomDate() {
+            const start = new Date(2023, 0, 1);
+            const end = new Date();
+            return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+        }
+
+        // Render scripts based on current filters
+        function renderScripts() {
+            scriptGrid.innerHTML = '';
+
+            const filteredScripts = scripts.filter(script => {
+                const matchesCategory = currentCategory === 'all' || script.category.includes(currentCategory);
+                const matchesSearch = script.game.toLowerCase().includes(currentSearch.toLowerCase()) || 
+                                      script.title.toLowerCase().includes(currentSearch.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+
+            // Sort by popularity and date
+            filteredScripts.sort((a, b) => {
+                if (a.category.includes("popular") && !b.category.includes("popular")) return -1;
+                if (!a.category.includes("popular") && b.category.includes("popular")) return 1;
+                return new Date(b.createdAt) - new Date(a.createdAt);
+            });
+
+            const totalPages = Math.ceil(filteredScripts.length / scriptsPerPage);
+            if (currentPage > totalPages && totalPages > 0) {
+                currentPage = totalPages;
+            }
+
+            const startIndex = (currentPage - 1) * scriptsPerPage;
+            const endIndex = startIndex + scriptsPerPage;
+            const paginatedScripts = filteredScripts.slice(startIndex, endIndex);
+
+            if (paginatedScripts.length === 0) {
+                scriptGrid.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-box-open"></i>
+                        <h3>No scripts found</h3>
+                        <p>Try changing your search or filter criteria</p>
+                    </div>
+                `;
+                return;
+            }
+
+            paginatedScripts.forEach(script => {
+                const scriptCard = document.createElement('div');
+                scriptCard.className = 'script-card';
+                scriptCard.innerHTML = `
+                    <img class="script-image" src="${script.image}" alt="${script.title}">
+                    <div class="script-content">
+                        <h3 class="script-title">${script.title}</h3>
+                        <p class="script-game">${script.game}</p>
+                        <p class="script-description">${script.description}</p>
+                        <div class="script-footer">
+                            <span class="script-key ${script.hasKey ? '' : 'not-available'}">
+                                ${script.hasKey ? 'Key Required' : 'No Key Needed'}
+                            </span>
+                            <button class="copy-btn" data-script-id="${script.id}">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                    </div>
+                `;
+                scriptGrid.appendChild(scriptCard);
+            });
+
+            // Add click event to all script cards
+            document.querySelectorAll('.script-card').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('copy-btn')) {
+                        const scriptId = parseInt(card.querySelector('.copy-btn').getAttribute('data-script-id'));
+                        openModal(scriptId);
+                    }
+                });
+            });
+
+            // Add click event to all copy buttons
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const scriptId = parseInt(btn.getAttribute('data-script-id'));
+                    copyScript(scriptId, btn);
+                });
+            });
+
+            renderPagination(filteredScripts.length);
+        }
+
+        // Render pagination buttons
+        function renderPagination(totalScripts = 0) {
+            pagination.innerHTML = '';
+            
+            const totalPages = Math.ceil(totalScripts / scriptsPerPage);
+            if (totalPages <= 1) return;
+            
+            // Previous button
+            const prevBtn = document.createElement('button');
+            prevBtn.className = 'page-btn';
+            prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            prevBtn.disabled = currentPage === 1;
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderScripts();
+                }
+            });
+            pagination.appendChild(prevBtn);
+            
+            // Page buttons
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+            
+            if (endPage - startPage + 1 < maxVisiblePages) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+            
+            if (startPage > 1) {
+                const firstBtn = document.createElement('button');
+                firstBtn.className = 'page-btn';
+                firstBtn.textContent = '1';
+                firstBtn.addEventListener('click', () => {
+                    currentPage = 1;
+                    renderScripts();
+                });
+                pagination.appendChild(firstBtn);
+                
+                if (startPage > 2) {
+                    const ellipsis = document.createElement('span');
+                    ellipsis.textContent = '...';
+                    ellipsis.style.padding = '8px 15px';
+                    pagination.appendChild(ellipsis);
+                }
+            }
+            
+            for (let i = startPage; i <= endPage; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+                pageBtn.textContent = i;
+                pageBtn.addEventListener('click', () => {
+                    currentPage = i;
+                    renderScripts();
+                });
+                pagination.appendChild(pageBtn);
+            }
+            
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    const ellipsis = document.createElement('span');
+                    ellipsis.textContent = '...';
+                    ellipsis.style.padding = '8px 15px';
+                    pagination.appendChild(ellipsis);
+                }
+                
+                const lastBtn = document.createElement('button');
+                lastBtn.className = 'page-btn';
+                lastBtn.textContent = totalPages;
+                lastBtn.addEventListener('click', () => {
+                    currentPage = totalPages;
+                    renderScripts();
+                });
+                pagination.appendChild(lastBtn);
+            }
+            
+            // Next button
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'page-btn';
+            nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            nextBtn.disabled = currentPage === totalPages;
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderScripts();
+                }
+            });
+            pagination.appendChild(nextBtn);
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Tab click events
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    currentCategory = tab.getAttribute('data-category');
+                    currentPage = 1;
+                    renderScripts();
+                });
+            });
+
+            // Search input event
+            searchInput.addEventListener('input', (e) => {
+                currentSearch = e.target.value;
+                currentPage = 1;
+                renderScripts();
+            });
+
+            // Modal close events
+            closeModal.addEventListener('click', closeModalFunc);
+            modalCloseBtn.addEventListener('click', closeModalFunc);
+            scriptModal.addEventListener('click', (e) => {
+                if (e.target === scriptModal) {
+                    closeModalFunc();
+                }
+            });
+
+            // Modal copy button event
+            modalCopyBtn.addEventListener('click', () => {
+                const scriptId = parseInt(modalCopyBtn.getAttribute('data-script-id'));
+                copyScript(scriptId, modalCopyBtn);
+            });
+        }
+
+        // Open modal with script details
+        function openModal(scriptId) {
+            const script = scripts.find(s => s.id === scriptId);
+            if (!script) return;
+
+            modalImage.src = script.image;
+            modalTitle.textContent = script.title;
+            modalGame.textContent = script.game;
+            modalDescription.textContent = script.description;
+            modalScript.textContent = script.script;
+            
+            modalKey.textContent = script.hasKey ? `Key: ${script.key}` : 'No Key Required';
+            modalKey.className = `modal-key ${script.hasKey ? 'available' : 'not-available'}`;
+            
+            modalCopyBtn.setAttribute('data-script-id', script.id);
+            modalCopyBtn.className = 'modal-btn modal-copy';
+            modalCopyBtn.innerHTML = 'Copy Script';
+            
+            scriptModal.classList.add('active');
+        }
+
+        // Close modal
+        function closeModalFunc() {
+            scriptModal.classList.remove('active');
+        }
+
+        // Copy script to clipboard
+        function copyScript(scriptId, button) {
+            const script = scripts.find(s => s.id === scriptId);
+            if (!script) return;
+
+            navigator.clipboard.writeText(script.script).then(() => {
+                // Change button style temporarily
+                button.classList.add('copied');
+                
+                if (button === modalCopyBtn) {
+                    button.textContent = 'Copied!';
+                } else {
+                    button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                }
+                
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    if (button === modalCopyBtn) {
+                        button.textContent = 'Copy Script';
+                    } else {
+                        button.innerHTML = '<i class="fas fa-copy"></i> Copy';
+                    }
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy script: ', err);
+                alert('Failed to copy script. Please try again.');
+            });
+        }
+
+        // Initialize the app
+        init();
+    </script>
+</body>
+</html>
