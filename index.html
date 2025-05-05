@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mega Script Hub - 250+ Scripts</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Base styles */
         :root {
             --primary: #1a73e8;
             --dark-blue: #0d47a1;
@@ -37,6 +37,7 @@
             padding: 20px;
         }
 
+        /* Header styles */
         header {
             display: flex;
             justify-content: space-between;
@@ -61,13 +62,17 @@
             font-size: 24px;
             font-weight: 700;
             background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            /* Improved compatibility for background-clip */
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -moz-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
+        /* Search bar styles */
         .search-container {
             position: relative;
-            width: 300px;
+            width: 350px;
         }
 
         .search-container input {
@@ -95,6 +100,7 @@
             color: var(--gray);
         }
 
+        /* Tab styles */
         .tabs {
             display: flex;
             gap: 10px;
@@ -122,6 +128,7 @@
             background-color: rgba(255, 255, 255, 0.2);
         }
 
+        /* Script grid styles */
         .script-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -158,10 +165,14 @@
             font-size: 16px;
             font-weight: 600;
             margin-bottom: 8px;
+            /* Improved line clamp compatibility */
             display: -webkit-box;
             -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            /* Fallback for non-WebKit browsers */
+            max-height: 1.2em;
+            line-height: 1.2em;
         }
 
         .script-game {
@@ -172,6 +183,8 @@
             -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            max-height: 1.2em;
+            line-height: 1.2em;
         }
 
         .script-description {
@@ -182,6 +195,9 @@
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            /* Fallback for non-WebKit browsers */
+            max-height: 2.4em;
+            line-height: 1.2em;
         }
 
         .script-footer {
@@ -226,6 +242,7 @@
             background-color: #0f0;
         }
 
+        /* Modal styles */
         .modal {
             position: fixed;
             top: 0;
@@ -369,6 +386,7 @@
             border-color: white;
         }
 
+        /* Empty state styles */
         .empty-state {
             text-align: center;
             padding: 50px 20px;
@@ -392,6 +410,7 @@
             color: #666;
         }
 
+        /* Pagination styles */
         .pagination {
             display: flex;
             justify-content: center;
@@ -423,6 +442,7 @@
             cursor: not-allowed;
         }
 
+        /* Responsive styles */
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
@@ -457,11 +477,11 @@
     <div class="container">
         <header>
             <div class="logo">
-                
-                <h1></h1>
+                <img src="https://i.imgur.com/JqYeZbL.png" alt="Script Hub Logo">
+                <h1>ScriptHub</h1>
             </div>
             <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Search 250+ scripts...">
+                <input type="text" id="searchInput" placeholder="Search scripts by title, game, or topic...">
                 <i class="fas fa-search"></i>
             </div>
         </header>
@@ -507,7 +527,7 @@
     </div>
 
     <script>
-        // Script database with 250+ entries
+        // Script database with accurate game-specific scripts
         const scripts = generateScriptDatabase();
         
         // Configuration
@@ -539,116 +559,205 @@
             renderPagination();
         }
 
-        // Generate a large script database
+        // Generate a realistic script database
         function generateScriptDatabase() {
             const games = [
-                { name: "Arsenal", categories: ["fps", "popular"] },
-                { name: "Phantom Forces", categories: ["fps"] },
-                { name: "Bad Business", categories: ["fps", "popular"] },
-                { name: "Counter Blox", categories: ["fps"] },
-                { name: "Blox Fruits", categories: ["rpg", "anime", "popular"] },
-                { name: "King Legacy", categories: ["rpg", "anime"] },
-                { name: "Grand Piece Online", categories: ["rpg", "anime"] },
-                { name: "Pet Simulator X", categories: ["simulator", "popular"] },
-                { name: "Adopt Me", categories: ["simulator"] },
-                { name: "Brookhaven RP", categories: ["simulator"] },
-                { name: "Jailbreak", categories: ["adventure", "popular"] },
-                { name: "Tower of Hell", categories: ["adventure"] },
-                { name: "Doors", categories: ["horror"] },
-                { name: "Evade", categories: ["horror"] },
-                { name: "Roblox (Universal)", categories: ["universal"] },
-                { name: "Anime Fighting Simulator", categories: ["anime", "rpg"] },
-                { name: "Shindo Life", categories: ["anime", "rpg"] },
-                { name: "All Star Tower Defense", categories: ["anime", "tower-defense"] },
-                { name: "Mining Simulator", categories: ["simulator"] },
-                { name: "Bee Swarm Simulator", categories: ["simulator"] },
-                { name: "Murder Mystery 2", categories: ["fps"] },
-                { name: "BedWars", categories: ["fps"] },
-                { name: "Rainbow Friends", categories: ["horror"] },
-                { name: "Piggy", categories: ["horror"] },
-                { name: "Royale High", categories: ["rpg"] },
-                { name: "Project Slayers", categories: ["anime", "rpg"] },
-                { name: "Slap Battles", categories: ["adventure"] },
-                { name: "Build A Boat For Treasure", categories: ["adventure"] }
-            ];
-
-            const scriptTypes = [
-                { name: "Aimbot", desc: "Advanced aiming assistance with customizable settings" },
-                { name: "ESP", desc: "Player and item visualization through walls" },
-                { name: "Auto Farm", desc: "Automatically completes repetitive tasks for you" },
-                { name: "Speed Hack", desc: "Increases movement and attack speed" },
-                { name: "Fly", desc: "Allows flying anywhere in the game" },
-                { name: "Infinite Yield", desc: "Advanced admin commands for moderation" },
-                { name: "Auto Collect", desc: "Automatically collects resources and items" },
-                { name: "Auto Win", desc: "Automatically wins games or matches" },
-                { name: "Item Dupe", desc: "Duplicates valuable in-game items" },
-                { name: "God Mode", desc: "Makes you invincible to damage" },
-                { name: "No Clip", desc: "Walk through walls and obstacles" },
-                { name: "Teleport", desc: "Instantly move to any location" },
-                { name: "Auto Parry", desc: "Automatically blocks incoming attacks" },
-                { name: "Auto Click", desc: "Automates clicking for repetitive tasks" },
-                { name: "Infinite Ammo", desc: "Never run out of ammunition" },
-                { name: "No Recoil", desc: "Removes weapon recoil for perfect accuracy" },
-                { name: "Silent Aim", desc: "Hits targets without visibly aiming" },
-                { name: "Auto Complete", desc: "Automatically completes objectives" },
-                { name: "Infinite Jump", desc: "Jump infinitely in mid-air" },
-                { name: "Wall Hack", desc: "See and shoot through walls" },
-                { name: "Chams", desc: "Highlights players through walls" },
-                { name: "Trigger Bot", desc: "Automatically shoots when target is in crosshair" },
-                { name: "FOV Changer", desc: "Adjust your field of view beyond normal limits" },
-                { name: "Hitbox Expander", desc: "Makes enemy hitboxes larger" },
-                { name: "Lag Switch", desc: "Creates artificial lag for advantage" }
+                { name: "Arsenal", categories: ["fps", "popular"], 
+                  scripts: [
+                    { type: "Aimbot", desc: "Precision aiming assistance with customizable FOV and smoothness" },
+                    { type: "ESP", desc: "Player outlines with health bars and distance indicators" },
+                    { type: "Trigger Bot", desc: "Automatically shoots when crosshair is on target" },
+                    { type: "No Recoil", desc: "Eliminates weapon recoil for perfect accuracy" },
+                    { type: "Hitbox Expander", desc: "Increases enemy hitbox sizes for easier hits" }
+                  ] 
+                },
+                { name: "Blox Fruits", categories: ["rpg", "anime", "popular"], 
+                  scripts: [
+                    { type: "Auto Farm", desc: "Automatically defeats NPCs and completes quests" },
+                    { type: "Auto Parry", desc: "Automatically counters incoming attacks" },
+                    { type: "Teleport", desc: "Instantly move to any island or location" },
+                    { type: "Dungeon Helper", desc: "Automatically completes dungeons" },
+                    { type: "Fruit Notifier", desc: "Alerts when rare fruits spawn" }
+                  ] 
+                },
+                { name: "Pet Simulator X", categories: ["simulator", "popular"], 
+                  scripts: [
+                    { type: "Auto Collect", desc: "Automatically collects coins and pets" },
+                    { type: "Auto Hatch", desc: "Automatically opens eggs" },
+                    { type: "Pet Dupe", desc: "Duplicates your best pets" },
+                    { type: "Auto Trade", desc: "Automatically trades pets for best value" },
+                    { type: "Zone Skipper", desc: "Unlocks all zones automatically" }
+                  ] 
+                },
+                { name: "Jailbreak", categories: ["adventure", "popular"], 
+                  scripts: [
+                    { type: "Speed Hack", desc: "Increased movement and vehicle speed" },
+                    { type: "Auto Rob", desc: "Automatically robs banks and stores" },
+                    { type: "No Clip", desc: "Walk through walls and obstacles" },
+                    { type: "Cop Bypass", desc: "Avoid police detection" },
+                    { type: "Money Dupe", desc: "Duplicate cash quickly" }
+                  ] 
+                },
+                { name: "All Star Tower Defense", categories: ["anime", "tower-defense"], 
+                  scripts: [
+                    { type: "Auto Place", desc: "Automatically places optimal tower formations" },
+                    { type: "Auto Wave", desc: "Automatically starts next waves" },
+                    { type: "Damage Multiplier", desc: "Increases tower damage output" },
+                    { type: "Infinite Gems", desc: "Generates unlimited in-game currency" },
+                    { type: "Unlock All Units", desc: "Access all towers regardless of level" }
+                  ] 
+                },
+                { name: "Doors", categories: ["horror"], 
+                  scripts: [
+                    { type: "Entity ESP", desc: "Highlights monsters through walls" },
+                    { type: "Auto Avoid", desc: "Automatically dodges monster attacks" },
+                    { type: "Item ESP", desc: "Highlights important items" },
+                    { type: "Speed Hack", desc: "Move faster than normal" },
+                    { type: "No Clip", desc: "Walk through walls to avoid danger" }
+                  ] 
+                },
+                { name: "Roblox (Universal)", categories: ["universal"], 
+                  scripts: [
+                    { type: "Infinite Yield", desc: "Advanced admin commands for any game" },
+                    { type: "Fly", desc: "Universal flying script for most games" },
+                    { type: "Noclip", desc: "Walk through walls in supported games" },
+                    { type: "Speed Hack", desc: "Increase movement speed" },
+                    { type: "Chat Spoofer", desc: "Change how your chat appears" }
+                  ] 
+                }
             ];
 
             const scriptDatabase = [];
             let id = 1;
 
-            // Generate scripts for each game and type combination
+            // Generate realistic scripts for each game
             games.forEach(game => {
-                scriptTypes.forEach(type => {
-                    // Skip some unlikely combinations
-                    if (game.name.includes("Simulator") && type.name.includes("Aimbot")) return;
-                    if (game.name.includes("FPS") && type.name.includes("Auto Farm")) return;
-                    
+                game.scripts.forEach(scriptType => {
                     const hasKey = Math.random() > 0.3; // 70% chance of requiring key
                     const isPopular = Math.random() > 0.7 || game.categories.includes("popular");
                     const isNew = Math.random() > 0.8;
                     
                     scriptDatabase.push({
                         id: id++,
-                        title: `${type.name} Script`,
+                        title: `${scriptType.type} Script`,
                         game: game.name,
-                        description: `${type.desc} for ${game.name}. ${getRandomDescriptionText()}`,
+                        description: `${scriptType.desc} for ${game.name}. ${getRandomDescriptionText()}`,
                         image: getRandomImage(game.name),
-                        script: `loadstring(game:HttpGet('https://raw.githubusercontent.com/scripts/${game.name.toLowerCase().replace(/ /g,'')}/${type.name.toLowerCase().replace(/ /g,'')}.lua'))()`,
+                        script: generateScriptCode(game.name, scriptType.type),
                         key: hasKey ? generateRandomKey(game.name) : "Not required",
                         category: [...game.categories, ...(isPopular ? ["popular"] : []), ...(isNew ? ["new"] : [])],
                         hasKey: hasKey,
-                        createdAt: getRandomDate()
+                        createdAt: getRandomDate(),
+                        topics: generateTopics(game.name, scriptType.type)
                     });
                 });
             });
 
             // Add some universal scripts
-            for (let i = 0; i < 30; i++) {
-                const type = scriptTypes[Math.floor(Math.random() * scriptTypes.length)];
+            const universalScripts = [
+                { type: "Infinite Yield", desc: "Advanced admin commands for any game" },
+                { type: "Fly", desc: "Universal flying script for most games" },
+                { type: "Noclip", desc: "Walk through walls in supported games" },
+                { type: "Speed Hack", desc: "Increase movement speed" },
+                { type: "Chat Spoofer", desc: "Change how your chat appears" },
+                { type: "FPS Booster", desc: "Improves game performance and framerate" },
+                { type: "Auto Clicker", desc: "Automates clicking for repetitive tasks" },
+                { type: "Reach Hack", desc: "Increases your interaction distance" },
+                { type: "Anti-AFK", desc: "Prevents being kicked for inactivity" },
+                { type: "Fullbright", desc: "Removes darkness from all games" }
+            ];
+
+            universalScripts.forEach(scriptType => {
                 const hasKey = Math.random() > 0.5;
                 
                 scriptDatabase.push({
                     id: id++,
-                    title: `Universal ${type.name}`,
+                    title: `Universal ${scriptType.type}`,
                     game: "Roblox (Universal)",
-                    description: `${type.desc} that works in most Roblox games. ${getRandomDescriptionText()}`,
+                    description: `${scriptType.desc} that works in most Roblox games. ${getRandomDescriptionText()}`,
                     image: getRandomImage("universal"),
-                    script: `loadstring(game:HttpGet('https://raw.githubusercontent.com/scripts/universal/${type.name.toLowerCase().replace(/ /g,'')}_v${Math.floor(Math.random() * 5) + 1}.lua'))()`,
+                    script: `loadstring(game:HttpGet('https://raw.githubusercontent.com/scripts/universal/${scriptType.type.toLowerCase().replace(/ /g,'')}_v${Math.floor(Math.random() * 5) + 1}.lua'))()`,
                     key: hasKey ? generateRandomKey("UNIV") : "Not required",
                     category: ["universal", ...(Math.random() > 0.7 ? ["popular"] : []), ...(Math.random() > 0.8 ? ["new"] : [])],
                     hasKey: hasKey,
-                    createdAt: getRandomDate()
+                    createdAt: getRandomDate(),
+                    topics: ["universal", scriptType.type.toLowerCase().replace(/ /g, '-')]
                 });
-            }
+            });
 
             return scriptDatabase;
+        }
+
+        function generateScriptCode(gameName, scriptType) {
+            const gameShort = gameName.toLowerCase().replace(/[^a-z]/g, '');
+            const scriptShort = scriptType.toLowerCase().replace(/ /g, '');
+            
+            // Generate realistic-looking script code based on type
+            switch(scriptType) {
+                case "Aimbot":
+                    return `-- ${gameName} Aimbot Script
+loadstring(game:HttpGet('https://scripts.xyz/${gameShort}/aimbot.lua'))()
+
+-- Configuration
+_G.AimbotSettings = {
+    FOV = 30,
+    Smoothness = 0.5,
+    TeamCheck = true,
+    VisibilityCheck = true,
+    Keybind = "MouseButton2"
+}`;
+                case "Auto Farm":
+                    return `-- ${gameName} Auto Farm Script
+local Farm = loadstring(game:HttpGet('https://scripts.xyz/${gameShort}/autofarm.lua'))()
+
+Farm:Start({
+    NPCs = {"Bandit", "Enemy", "Boss"},
+    Range = 50,
+    Delay = 1,
+    UseSkills = true
+})`;
+                case "ESP":
+                    return `-- ${gameName} ESP Script
+local ESP = loadstring(game:HttpGet('https://scripts.xyz/${gameShort}/esp.lua'))()
+
+ESP:Toggle(true)
+ESP:Settings({
+    Boxes = true,
+    Names = true,
+    Health = true,
+    Distance = true,
+    TeamColor = true
+})`;
+                default:
+                    return `-- ${gameName} ${scriptType} Script
+loadstring(game:HttpGet('https://scripts.xyz/${gameShort}/${scriptShort}.lua'))()`;
+            }
+        }
+
+        function generateTopics(gameName, scriptType) {
+            const topics = [];
+            
+            // Add game-specific topics
+            topics.push(gameName.toLowerCase().replace(/ /g, '-'));
+            
+            // Add script type topics
+            topics.push(scriptType.toLowerCase().replace(/ /g, '-'));
+            
+            // Add category topics
+            if (scriptType.includes("Aimbot") || scriptType.includes("ESP")) {
+                topics.push("combat");
+            }
+            if (scriptType.includes("Auto")) {
+                topics.push("automation");
+            }
+            if (scriptType.includes("Farm")) {
+                topics.push("grinding");
+            }
+            if (scriptType.includes("Speed")) {
+                topics.push("movement");
+            }
+            
+            return topics;
         }
 
         function getRandomDescriptionText() {
@@ -670,13 +779,11 @@
         function getRandomImage(gameName) {
             const gameImages = {
                 "Arsenal": ["https://i.imgur.com/8KQnZ9f.png", "https://i.imgur.com/2KvLm9R.png"],
-                "Phantom Forces": ["https://i.imgur.com/1AbC2dE.png"],
                 "Blox Fruits": ["https://i.imgur.com/3QvJ7bT.png"],
                 "Pet Simulator X": ["https://i.imgur.com/7VnGk9d.png"],
                 "Jailbreak": ["https://i.imgur.com/JqYeZbL.png"],
-                "Tower of Hell": ["https://i.imgur.com/9LmNpXz.png"],
-                "Adopt Me": ["https://i.imgur.com/4MnQk9X.png"],
-                "Brookhaven RP": ["https://i.imgur.com/6DeFg7H.png"],
+                "All Star Tower Defense": ["https://i.imgur.com/mQ8WwXz.png"],
+                "Doors": ["https://i.imgur.com/pL9V8qT.png"],
                 "Roblox (Universal)": ["https://i.imgur.com/5XZJQ9P.png"],
                 "universal": ["https://i.imgur.com/5XZJQ9P.png"]
             };
@@ -726,8 +833,12 @@
 
             const filteredScripts = scripts.filter(script => {
                 const matchesCategory = currentCategory === 'all' || script.category.includes(currentCategory);
-                const matchesSearch = script.game.toLowerCase().includes(currentSearch.toLowerCase()) || 
-                                      script.title.toLowerCase().includes(currentSearch.toLowerCase());
+                const matchesSearch = currentSearch === '' || 
+                    script.game.toLowerCase().includes(currentSearch.toLowerCase()) || 
+                    script.title.toLowerCase().includes(currentSearch.toLowerCase()) ||
+                    script.description.toLowerCase().includes(currentSearch.toLowerCase()) ||
+                    script.topics.some(topic => topic.includes(currentSearch.toLowerCase()));
+                
                 return matchesCategory && matchesSearch;
             });
 
